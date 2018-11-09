@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MuhBayu\\Larapriv\\": "src/"
+            "MuhBayu\\LaraPriv\\": "src/"
         }
     }
 }
