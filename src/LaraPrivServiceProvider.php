@@ -17,7 +17,7 @@ class LaraPrivServiceProvider extends ServiceProvider
          __DIR__.'/Config/larapriv.php', 'larapriv'
       );
       $this->loadRoutesFrom(__DIR__.'/routes.php');
-      $this->loadMigrationsFrom(__DIR__.'../migrations');
+      $this->loadMigrationsFrom(__DIR__.'/../migrations');
 
     }
 
