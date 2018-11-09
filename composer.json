@@ -1,0 +1,30 @@
+{
+    "name": "muhbayu/larapriv",
+    "description": "Simple Privilege Roles",
+	"version": "0.1.0",
+    "type": "library",
+	"keywords": [
+		"privileges",
+		"permission",
+		"laravel permission",
+		"laravel privileges"
+	],
+	"homepage": "https://github.com/MuhBayu/larapriv",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MuhBayu",
+            "email": "bnugraha00@gmail.com",
+			"homepage": "https://bayyu.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php" : "~5.6|~7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MuhBayu\\Larapriv\\": "src"
+        }
+    }
+}
