@@ -1,4 +1,4 @@
-## LaraPriv
+# LaraPriv
 
 Simple Privileges Roles for Laravel
 
@@ -38,3 +38,7 @@ protected $routeMiddleware = [
 	'privileges.roles' => \MuhBayu\LaraPriv\Middleware\RolesPermission::class,
 ];
 ```
+
+## Documentation
+**_Coming soon_**
+
