@@ -103,7 +103,7 @@ class LaraPriv implements \MuhBayu\LaraPriv\LaraPrivInterface
     */
    public static function getRoles($role=null) {
       $prefix = Self::getPrefix();
-      @$modul_id = DB::table(Self::getInstance()->tb_moduls)->where('prefix', $prefix['real'])->first()->id;
+      @$modul_id = DB::table(Self::getInstance()->tb_moduls)->where('prefix', $prefix['basename'])->orWhere('prefix', $prefix['real'])->first()->id;
       $roles = PermissionModel::where('privilege_moduls_id', $modul_id)->first();
       if($role) return $roles->{$role};
       return $roles;
@@ -151,6 +151,30 @@ class LaraPriv implements \MuhBayu\LaraPriv\LaraPrivInterface
       return $priv_roles;
    }
 
+   /**
+    * @return array
+    */
+   public static function generate_menus() {
+      $menus = '';
+      foreach (DB::table(Self::getInstance()->tb_moduls)->get() as $key => $modul) {
+         $where = ['privilege_id' => Auth()->user()->privilege_id, 'privilege_moduls_id' => $modul->id];
+         $uri = route('management')."/$modul->prefix";
+         $role = PermissionModel::where($where)->first();
+         if ($role && $role->is_read !='1') continue;
+         $menu = "<li><a href=\"$uri\"><i class='fa fa-home'></i>$modul->name</a></li>";
+         $menus .= $menu;
+      }
+      return $menus;
+   }
+   public static function has_modul_access($privilege_id, $prefix, $role='is_create') {
+      $tableModul = Self::getInstance()->tb_moduls;
+      $tableJoin = Self::getInstance()->tb_permissions;
+      $permission = Modul::where('prefix', $prefix)
+                  ->leftJoin($tableJoin, function($join) use ($tableJoin, $tableModul) {
+                     $join->on("$tableJoin.privilege_moduls_id", '=', "$tableModul.id");
+                  })->where("privilege_id", $privilege_id)->first();
+      return $permission;
+   }
    /**
     * Get All Moduls
     *

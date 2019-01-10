@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Trait for Model Users
  */
-trait PrivilegeModel
+trait HasPrivilege
 {
    public function privilege()
    {

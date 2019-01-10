@@ -25,9 +25,7 @@ class RolesPermission
       $route_name = \Request::route()->getName();
       $prefix = LaraPriv::getPrefix();
       $priv = Auth()->user()->privilege_id;
-	  if(!is_null($priv)) {
-		$super_admin = Auth()->user()->privilege->is_superadmin;
-	  }  
+      $super_admin = Auth()->user()->privilege->is_superadmin;
       $moduls = LaraPriv::getRoles();
       // $moduls = DB::table(config('larapriv.table_moduls_as'))->leftJoin(config('larapriv.table_permissions_as'), 'pp.privilege_moduls_id', '=', 'pm.id')->where('prefix', $prefix['real'])->where('pp.privilege_id', $priv)->first();
       if(in_array($prefix['basename'], $this->superadmin_prefix) && !$super_admin) return $this->redirectErrorAccess();

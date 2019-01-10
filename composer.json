@@ -25,6 +25,9 @@
     "autoload": {
         "psr-4": {
             "MuhBayu\\LaraPriv\\": "src/"
-        }
+        },
+        "files" : [
+           "Helpers.php"
+        ]
     }
 }

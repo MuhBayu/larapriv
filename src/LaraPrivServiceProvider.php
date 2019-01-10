@@ -14,10 +14,11 @@ class LaraPrivServiceProvider extends ServiceProvider
     public function boot()
     {
       $this->mergeConfigFrom(
-         __DIR__.'/Config/larapriv.php', 'larapriv'
+         __DIR__.'/Config/Larapriv.php', 'larapriv'
       );
       $this->loadRoutesFrom(__DIR__.'/routes.php');
       $this->loadMigrationsFrom(__DIR__.'/../migrations');
+
 
     }
 
@@ -29,5 +30,6 @@ class LaraPrivServiceProvider extends ServiceProvider
     public function register()
     {
       require_once(__DIR__.'/LaraPriv.php');
+      require_once(__DIR__.'/Helpers.php');
     }
 }
