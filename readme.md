@@ -3,7 +3,7 @@
 Simple Privileges Roles for Laravel
 
 ## Installation
-This package can be used in Laravel 5.4 or higher. If you are using an older version of Laravel, take a look at the v1 branch of this package.
+This package can be used in Laravel 5.7 or higher.
 
 You can install the package via composer:
 
@@ -11,7 +11,7 @@ You can install the package via composer:
 composer require muhbayu/larapriv
 ```
 
-In Laravel 5.5 the service provider will automatically get registered. In older versions of the framework just add the service provider in `config/app.php` file:
+In Laravel 5.5 or higher the service provider will automatically get registered. In older versions of the framework just add the service provider in `config/app.php` file:
 
 ```php
 'providers' => [
@@ -41,4 +41,3 @@ protected $routeMiddleware = [
 
 ## Documentation
 **_Coming soon_**
-
