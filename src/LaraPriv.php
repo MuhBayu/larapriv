@@ -101,10 +101,11 @@ class LaraPriv implements \MuhBayu\LaraPriv\LaraPrivInterface
     * @param null $role
     * @return \MuhBayu\LaraPriv\Models\Permission
     */
-   public static function getRoles($role=null) {
+   public static function getRoles($role=null, $priv_id=null) {
       $prefix = Self::getPrefix();
+      // if(!is_null($priv_id)) $priv_id = Auth()->user()->privilege_id;
       @$modul_id = DB::table(Self::getInstance()->tb_moduls)->where('prefix', $prefix['basename'])->orWhere('prefix', $prefix['real'])->first()->id;
-      $roles = PermissionModel::where('privilege_moduls_id', $modul_id)->first();
+      $roles = PermissionModel::where('privilege_moduls_id', $modul_id)->where('privilege_id', $priv_id)->first();
       if($role) return $roles->{$role};
       return $roles;
    }

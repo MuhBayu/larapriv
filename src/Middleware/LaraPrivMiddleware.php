@@ -15,9 +15,9 @@ class RolesPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    protected $superadmin_prefix;
+    protected $excluded_prefix;
     public function __construct() {
-      $this->superadmin_prefix = config('larapriv.superadmin_prefix_allowed');
+      $this->excluded_prefix = config('larapriv.excluded_prefix');
     }
     public function handle($request, Closure $next)
     {
@@ -25,10 +25,11 @@ class RolesPermission
       $route_name = \Request::route()->getName();
       $prefix = LaraPriv::getPrefix();
       $priv = Auth()->user()->privilege_id;
+      $request->request->add(['privilege_id' => $priv]);
       $super_admin = Auth()->user()->privilege->is_superadmin;
-      $moduls = LaraPriv::getRoles();
+      $moduls = LaraPriv::getRoles(null, $priv);
       // $moduls = DB::table(config('larapriv.table_moduls_as'))->leftJoin(config('larapriv.table_permissions_as'), 'pp.privilege_moduls_id', '=', 'pm.id')->where('prefix', $prefix['real'])->where('pp.privilege_id', $priv)->first();
-      if(in_array($prefix['basename'], $this->superadmin_prefix) && !$super_admin) return $this->redirectErrorAccess();
+      if(in_array($prefix['basename'], $this->excluded_prefix) && !$super_admin) return $this->redirectErrorAccess();
       $is_json = true;
       // dd($prefix);
       switch ($request->method()) {
